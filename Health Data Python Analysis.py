@@ -55,13 +55,22 @@ differnt_in_maxes = highest_heart_rate - max_heart_rate
 differnt_in_maxes = round(differnt_in_maxes, 2)
 
 
+##
+Total_steps = df['Step Count (steps)'].sum()
+## don't need to round as all INT
+
+
+
+##
+
+
 print("Average Kcals burned per day:" + " " + str(cals_burned))
 print("Average minutes spent exercising per day:" + " " + str(exercise_mins))
 print("")
 
 
-print(differnt_in_maxes)
-print(highest_heart_rate)
+#print(differnt_in_maxes)
+#print(highest_heart_rate)
 
 print("Average Daily Heart Rate:" + " " + str(heart_rate_avg) + " BPM") 
 if differnt_in_maxes > 0:
@@ -71,3 +80,6 @@ elif differnt_in_maxes < 0:
 else:
     print("And your max heart rate was:" + " " + str(max_heart_rate)+ " BPM" + " which is the same as the max for your age!!")
     
+print("")
+
+print("Total steps walked:" + " " + str(Total_steps))

@@ -1,5 +1,9 @@
 import pandas as pd
 import numpy 
+import matplotlib.pyplot as plt
+from datetime import datetime
+
+
 
 age = float(input("What is your age?"))
 
@@ -11,12 +15,16 @@ highest_heart_rate = 208 - (age * 0.7)
 df = pd.read_csv(r"C:\Users\Oliver\OneDrive\Documents\Apple Watch Data/General Health Data.csv",index_col=False) 
 
 ## needed troubleshooting
-print(df['Active Energy (kJ)'].dtype)
-print(df['Active Energy (kJ)'].isna().sum())  
-print(df['Active Energy (kJ)'].unique())
+#print(df['Active Energy (kJ)'].dtype)
+#print(df['Active Energy (kJ)'].isna().sum())  
+#print(df['Active Energy (kJ)'].unique())
 
+#Change to a date remove 00:00:00
+df['Date'] = df['Date'].apply(lambda x: datetime.strptime(x, '%Y-%m-%d %H:%M:%S').strftime('%Y-%m-%d'))
 
-print(df['Active Energy (kJ)'])
+#print(df['Date'])
+
+#print(df['Active Energy (kJ)'])
 df = df.dropna(subset = ['Active Energy (kJ)'])
 
 # need to change to kcal
@@ -83,3 +91,23 @@ else:
 print("")
 
 print("Total steps walked:" + " " + str(Total_steps))
+
+#################################  Graphs
+
+
+ 
+## drop any null values, for plotting
+df = df.dropna(subset = ['Resting Heart Rate (bpm)'])
+
+
+heart_rate_x = df['Resting Heart Rate (bpm)']
+date_y = df['Date']
+
+
+plt.plot(heart_rate_x, date_y)
+plt.xticks(rotation=45) 
+plt.title('Resting Heart Rate Over Time')
+plt.show()
+
+
+
